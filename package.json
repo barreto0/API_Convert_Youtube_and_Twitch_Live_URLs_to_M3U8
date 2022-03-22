@@ -1,0 +1,13 @@
+{
+  "name": "convert-live-urls-to-m3u8",
+  "version": "1.0.0",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.19.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "twitch-m3u8": "^1.1.5",
+    "yt-live-url": "^1.0.1"
+  }
+}
