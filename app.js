@@ -50,7 +50,6 @@ async function getM3U8url(stream_url) {
     } else if (stream_url.includes("youtube")) {
       let youtubeM3U8Url = "";
       var channelId = stream_url.split("https://www.youtube.com/channel/")[1];
-      console.log(channelId);
       if (channelId == null) {
         return {
           status: 400,
