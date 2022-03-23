@@ -101,7 +101,9 @@ async function getYoutubeStream(id) {
   console.log("status: " + res.statusCode);
   let bodyText = await res.body.text();
   let stream = bodyText.match(/(?<=hlsManifestUrl":").*\.m3u8/g);
-  console.log("M3U8 URL: " + stream);
+  let hasMatch = bodyText.includes(".m3u8");
+  console.log("has m3u8 " + hasMatch);
+  //console.log("M3U8 URL: " + stream);
   return stream;
 }
 
