@@ -58,7 +58,7 @@ async function getM3U8url(stream_url) {
         youtubeM3U8Url = await Youtube.getStream(channelId);
         return {
           status: 400,
-          message: "Passe uma url do canal de streaming da twitch válido",
+          message: "Passe uma url do canal do youtube válido",
         };
       } catch (e) {
         console.log(e);
