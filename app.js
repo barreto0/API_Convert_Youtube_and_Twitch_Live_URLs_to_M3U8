@@ -1,6 +1,7 @@
 //jshint esversion:6
 
 const express = require("express");
+const fetch = require("cross-fetch");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -77,11 +78,28 @@ async function getM3U8url(stream_url) {
 }
 
 async function getYoutubeStream(id) {
+  // (async () => {
+  //   try {
+  //     const res = await fetch("https://www.youtube.com/watch?v=2gO1v2GPMFk");
+
+  //     if (res.status >= 400) {
+  //       throw new Error("Bad response from server");
+  //     }
+
+  //     const user = await res.body;
+
+  //     console.log(user);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // })();
   console.log("channel id: " + id);
   let url = "https://www.youtube.com/channel/" + id + "/live";
+
   console.log("live url: " + url);
-  const { body } = await request(url);
-  let bodyText = await body.text();
+  const res = await request(url);
+  console.log("status: " + res.statusCode);
+  let bodyText = await res.body.text();
   let stream = bodyText.match(/(?<=hlsManifestUrl":").*\.m3u8/g);
   console.log("M3U8 URL: " + stream);
   return stream;
