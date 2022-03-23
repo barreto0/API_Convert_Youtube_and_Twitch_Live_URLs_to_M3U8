@@ -50,16 +50,16 @@ async function getM3U8url(stream_url) {
     } else if (stream_url.includes("youtube")) {
       let youtubeM3U8Url = "";
       var channelId = stream_url.split("https://www.youtube.com/channel/")[1];
+      console.log(channelId);
       if (channelId == null) {
-        console.log("Passe uma url de um canal do youtube válido");
-        return null;
+        return {
+          status: 400,
+          message: "Passe uma url de um canal do youtube válido",
+        };
       }
       try {
         youtubeM3U8Url = await Youtube.getStream(channelId);
-        return {
-          status: 400,
-          message: "Passe uma url do canal do youtube válido",
-        };
+        return { status: 200, message: "success", url: youtubeM3U8Url };
       } catch (e) {
         console.log(e);
         return {
