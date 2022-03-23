@@ -12,6 +12,7 @@
     "yt-live-url": "^1.0.1"
   },
   "scripts": {
+    "start": "node server.js",
     "test": "jest"
   },
   "devDependencies": {
