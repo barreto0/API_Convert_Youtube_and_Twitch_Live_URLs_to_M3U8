@@ -5,6 +5,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const Youtube = require("yt-live-url");
+const { request } = require("undici");
 const twitch = require("twitch-m3u8");
 
 const app = express();
@@ -57,7 +58,7 @@ async function getM3U8url(stream_url) {
         };
       }
       try {
-        youtubeM3U8Url = await Youtube.getStream(channelId);
+        youtubeM3U8Url = await getYoutubeStream(channelId);
         return { status: 200, message: "success", url: youtubeM3U8Url };
       } catch (e) {
         console.log(e);
@@ -73,6 +74,18 @@ async function getM3U8url(stream_url) {
   } else {
     return { status: 400, message: "bad request" };
   }
+}
+
+async function getYoutubeStream(id) {
+  console.log("channel id: " + id);
+  let url = "https://www.youtube.com/channel/" + id + "/live";
+  console.log("live url: " + url);
+  const { body } = await request(url);
+  let bodyText = await body.text();
+  console.log("body text: " + bodyText);
+  let stream = bodyText.match(/(?<=hlsManifestUrl":").*\.m3u8/g);
+  console.log("M3U8 URL: " + stream);
+  return stream;
 }
 
 module.exports = app;
