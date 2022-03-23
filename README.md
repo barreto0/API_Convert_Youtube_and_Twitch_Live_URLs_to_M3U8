@@ -2,4 +2,4 @@
 
 # Send in the request body: {"url" : "Twitch/Youtube channel url that is streaming"}
 
-url: https://convert-youtube-twitch-m3u8.herokuapp.com/
+url: https://salty-shore-69564.herokuapp.com/
