@@ -1,6 +1,7 @@
 //jshint esversion:6
 
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 
 const Youtube = require("yt-live-url");
@@ -10,6 +11,12 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
+
+app.get("/", async function (req, res) {
+  res.status(200);
+  res.json({ message: "olá mundo" });
+});
 
 app.post("/convert-url-to-m3u8", async function (req, res) {
   let payload = await getM3U8url(req.body.url);
@@ -69,6 +76,4 @@ async function getM3U8url(stream_url) {
   }
 }
 
-app.listen(3000, function () {
-  console.log("Server is up on port 3000");
-});
+module.exports = app;
